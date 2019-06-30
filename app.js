@@ -1,13 +1,19 @@
-// == is about comparison when you know the Data Types
+// How important is to master Scope & Closure ~ Second Pillar in JavaScript.
 
-var studentName1 = "Frank";
-var studentName2 = `${studentName1}`;
+var teacher = "Kyle";
 
-console.log(studentName1 == studentName2); // true
-console.log(studentName1 === studentName2); // true
+console.log(teacher);
 
-var workshopEnrollment1 = 16;
-var workshopEnrollment2 = workshopEnrollment1 + 0;
+function otherClass() {
+  // Here we dont' have a variable declaration with identifier teacher, so It'll look for the variable teacher in the outer parent scope (global) and updates (re-assign) the value of teacher variable.
 
-console.log(workshopEnrollment1 == workshopEnrollment2); // true
-console.log(workshopEnrollment1 === workshopEnrollment2); // true
+  teacher = "Suzy";
+  topic = "React";
+  console.log("Welcome");
+}
+
+otherClass();
+
+console.log(teacher);
+
+console.log(topic);
