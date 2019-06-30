@@ -1,30 +1,30 @@
-// This Loop will give us an output of 10 ( 10 Times )
+var favoriteBooks = [];
 
-// Reason why it happens? It's a scope problem, Here setTimeout hold 10 invokation of the function inside / callback passed because setTimeout is in the Loop and when all these function invokations executes 10 times and it refers to the outer global variable i.
+function addFavoriteBook(book) {
+  // First, We'll check if the book string contains great or not, If not then we'll add this to our collection.
 
-for (var i = 0; i < 10; i++) {
-  setTimeout(function() {
-    console.log("The number is " + i);
-  }, 0);
+  // Don't assume that user will always pass an String as input for Book. So Double Test it before executing.
+
+  if (typeof book === "string") {
+    const bookLowerCaseString = book.toLowerCase();
+
+    if (!bookLowerCaseString.includes("great")) {
+      // Using .includes() on string, I can check if this string contains "great" as sub-string or Not.
+
+      favoriteBooks.push(book);
+    }
+
+    // No Else Here.
+  } else {
+    console.error("Please pass an String as input for Book");
+  }
 }
 
-// How to fix that Issue? The problem exists due to the outer scope. as i is defined by the var keyword that has no block scoping so it won't create any private scopes for the variable i, Instead it's a global variable that is going to be update 10 Times. And our function inside setTimeout that is waiting for 10 Executions will refrence that variable when executes at that time value of i will be 10.
+addFavoriteBook("A Song of Ice and Fire");
+addFavoriteBook("The Great Gatsby");
+addFavoriteBook("Crime & Punishment");
+addFavoriteBook("Great Expectations");
+addFavoriteBook("You Don't Know Js");
+addFavoriteBook(1);
 
-// Approach One: We can solve this using let keyword for i variable. After that it'll create 10 different private scope for the value of i that the function inside setTimeout can access.
-
-for (let i = 0; i < 10; i++) {
-  setTimeout(function() {
-    console.log(i);
-  }, 10);
-}
-
-// Approach Two: Or we can create a Private Scope using an IIFE that has reference to the variable i and hold it's value which is not going to be collected by the gargable collector while execution.
-
-for (var i = 0; i < 10; i++) {
-  (function(i) {
-    setTimeout(function() {
-      // Here i will reference to the private scope value of i, i.e created 10 times.
-      console.log(i);
-    }, 10);
-  })(i);
-}
+console.log(favoriteBooks);
