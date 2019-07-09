@@ -1,16 +1,16 @@
-function Workshop(teacher) {
-  this.teacher = teacher;
+class Workshop {
+  constructor(teacher) {
+    this.teacher = teacher;
+  }
+  ask(question) {
+    console.log(this.teacher, question);
+  }
 }
 
-Workshop.prototype.ask = function(question) {
-  console.log(this.teacher, question);
-};
-
 var deepJS = new Workshop("Kyle");
+
 var reactJS = new Workshop("Suzy");
 
-// Here "this" implicity binds to deepJS Instance object
-deepJS.ask("Is 'prototype' a class?");
+deepJS.ask("Is 'class' a class?");
 
-// Here "this" implicity binds to reactJS Instance object
-reactJS.ask("Isn't 'prototype' ugly?");
+reactJS.ask("Is this class OK?");
