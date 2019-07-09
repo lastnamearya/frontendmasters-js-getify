@@ -1,19 +1,16 @@
-// How important is to master Scope & Closure ~ Second Pillar in JavaScript.
-
-var teacher = "Kyle";
-
-console.log(teacher);
-
-function otherClass() {
-  // Here we dont' have a variable declaration with identifier teacher, so It'll look for the variable teacher in the outer parent scope (global) and updates (re-assign) the value of teacher variable.
-
-  teacher = "Suzy";
-  topic = "React";
-  console.log("Welcome");
+function Workshop(teacher) {
+  this.teacher = teacher;
 }
 
-otherClass();
+Workshop.prototype.ask = function(question) {
+  console.log(this.teacher, question);
+};
 
-console.log(teacher);
+var deepJS = new Workshop("Kyle");
+var reactJS = new Workshop("Suzy");
 
-console.log(topic);
+// Here "this" implicity binds to deepJS Instance object
+deepJS.ask("Is 'prototype' a class?");
+
+// Here "this" implicity binds to reactJS Instance object
+reactJS.ask("Isn't 'prototype' ugly?");
